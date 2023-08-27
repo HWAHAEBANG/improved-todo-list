@@ -6,8 +6,22 @@ on: # 언제 동작 할 것인가?
       - main
 
 jobs: #어떤 작업을 진행할 것인가.
-  cicd: #CI/CD를 진행할 것이다.
+  cicd: #CI/CD를 진행할 것이다.(사용자 지정 이름)
     runs-on: ubuntu-latest # 우분투 환경에서 실행할 것이다.
     steps: # 진행 순서는 다음과 같다. run은 스크립트, use는 액션
-      - run: node -v
-      - run: echo hello,world!
+      - uses: actions/checkout@v3 # checkout 버전3 액션을 사용할 것이다 마켓 플레이스 액션.
+        with: # checkout 공식문서에 따라 추가
+          ref: 'main' # main 브랜치로 갈 것이다.
+      - run: npm ci # 디펜던시 설치해주기 clean install(==npm install)
+      - run: npm run test # 기본 파일로 있는 App.test.tsx가 실행되는 것.
+      - run: npm run build # 빌드 돌리기
+      - name: deploy to s3 # 아래 step의 이름을 부여
+        uses: jakejarvis/s3-sync-action@master # 이하 마켓플레이스 액션.
+        with:
+          args: --delete # 옵션을 넘겨줌.
+        env: # 필요한 환경변수들
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'ap-northeast-2'
+          SOURCE_DIR: 'build'
