@@ -1,0 +1,13 @@
+name: CI/CD-improved-todo-list
+
+on: # 언제 동작 할 것인가?
+  push: # push (&PR) 시 동작할 것이다.
+    branch: # main 브랜치에 push할 때 동작할 것이다.
+      - main
+
+jobs: #어떤 작업을 진행할 것인가.
+  cicd: #CI/CD를 진행할 것이다.
+    runs-on: ubuntu-latest # 우분투 환경에서 실행할 것이다.
+    steps: # 진행 순서는 다음과 같다. run은 스크립트, use는 액션
+      - run: node -v
+      - run: echo hello,world!
