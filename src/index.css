@@ -9,3 +9,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.active {
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
