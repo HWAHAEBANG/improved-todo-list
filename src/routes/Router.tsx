@@ -5,6 +5,8 @@ import LandingPage from '../pages/LandingPage';
 import SigninPage from '../pages/SigninPage';
 import SignupPage from '../pages/SignupPage';
 import TodoPage from '../pages/TodoPage';
+import ProtectedRoute from './ProtectedRoute';
+import PublicRoute from './PublicRoute';
 
 const Router = createBrowserRouter([
   {
@@ -18,15 +20,27 @@ const Router = createBrowserRouter([
       },
       {
         path: '/signin',
-        element: <SigninPage />,
+        element: (
+          <PublicRoute>
+            <SigninPage />
+          </PublicRoute>
+        ),
       },
       {
         path: '/signup',
-        element: <SignupPage />,
+        element: (
+          <PublicRoute>
+            <SignupPage />
+          </PublicRoute>
+        ),
       },
       {
         path: '/todo',
-        element: <TodoPage />,
+        element: (
+          <ProtectedRoute>
+            <TodoPage />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
