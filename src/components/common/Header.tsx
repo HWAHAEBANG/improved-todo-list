@@ -23,7 +23,12 @@ export default Header;
 
 const HeaderContainer = styled.main`
   background-color: #03c75a;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
 `;
+
 const HeaderInner = styled.header`
   width: 1080px;
   height: 50px;
