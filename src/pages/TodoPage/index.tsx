@@ -1,5 +1,29 @@
+import { styled } from 'styled-components';
+import TodoInput from '../../components/todo/TodoInput';
+import TodoListSection from '../../components/todo/TodoListSection';
+
 const TodoPage = () => {
-  return <div>TodoPage</div>;
+  return (
+    <TodoContainer>
+      <TodoInner>
+        <TodoInput />
+        <TodoListSection />
+      </TodoInner>
+    </TodoContainer>
+  );
 };
 
 export default TodoPage;
+
+const TodoContainer = styled.main`
+  background-color: red;
+`;
+
+const TodoInner = styled.section`
+  background-color: yellow;
+  padding-top: 50px;
+  box-sizing: border-box;
+  min-height: 100vh;
+  /* display: flex; */
+  /* flex-direction: column; */
+`;
