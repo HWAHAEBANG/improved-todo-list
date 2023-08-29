@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { ChangeEventHandler /* , FormEventHandler */ } from 'react';
 
 const TodoInput = () => {
-  const [intputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
     setInputValue(e.currentTarget.value);
@@ -16,11 +16,11 @@ const TodoInput = () => {
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        value={intputValue}
+        value={inputValue}
         onChange={handleChange}
         placeholder="할 일을 입력해주세요."
       />
-      <button>추가</button>
+      <button type="submit">추가</button>
     </form>
   );
 };
