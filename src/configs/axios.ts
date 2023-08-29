@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getToken } from '../utils/localStorage';
 
 export const instance = axios.create({
   baseURL: 'https://www.pre-onboarding-selection-task.shop',
@@ -10,7 +11,7 @@ export const instance = axios.create({
 instance.interceptors.request.use(
   config => {
     //config: Axios 요청 설정 객체
-    const token = localStorage.getItem('access_token');
+    const token = getToken();
 
     // if문을 추가했기 때문에 토큰이 필요없는 요청에도 가능
     if (token) config.headers.Authorization = `Bearer ${token}`;
