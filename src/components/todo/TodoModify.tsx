@@ -1,6 +1,10 @@
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler, FC, useState } from 'react';
 
-const TodoModify = () => {
+interface Props {
+  setIsEditMode: (x: boolean) => void;
+}
+
+const TodoModify: FC<Props> = ({ setIsEditMode }) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
@@ -12,7 +16,7 @@ const TodoModify = () => {
   };
 
   const handleCancel = () => {
-    alert('삭제');
+    setIsEditMode(false);
   };
 
   return (

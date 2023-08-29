@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
 interface Props {
-  isEditMode: () => {};
+  setIsEditMode: (x: boolean) => void;
 }
 
-const TodoShow: FC<Props> = ({ isEditMode }) => {
+const TodoShow: FC<Props> = ({ setIsEditMode }) => {
   const handleDelete = () => {
     alert('삭제');
   };
@@ -12,7 +12,7 @@ const TodoShow: FC<Props> = ({ isEditMode }) => {
   return (
     <form>
       <p>투두내용</p>
-      <button type="button" onClick={isEditMode}>
+      <button type="button" onClick={() => setIsEditMode(true)}>
         수정
       </button>
       <button type="button" onClick={handleDelete}>
