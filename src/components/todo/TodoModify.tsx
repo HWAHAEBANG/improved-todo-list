@@ -1,22 +1,35 @@
-import { ChangeEventHandler, FC, useState } from 'react';
+import { ChangeEventHandler, FC, FormEvent, useState } from 'react';
 import { styled } from 'styled-components';
+import { Todo } from '../../types/todo';
+import { todo as todoApi } from '../../apis/todo';
 
 interface Props {
   setIsEditMode: (x: boolean) => void;
+  todo: Todo;
+  setTodo: (targetId: number, newTodo: Todo) => void;
 }
 
-const TodoModify: FC<Props> = ({ setIsEditMode }) => {
-  const [inputValue, setInputValue] = useState('');
+const TodoModify: FC<Props> = ({ setIsEditMode, todo, setTodo }) => {
+  const [inputValue, setInputValue] = useState(todo.todo);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
     setInputValue(e.currentTarget.value);
   };
 
-  const handleSubmit = () => {
-    alert('제출');
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    todoApi
+      .updateTodo(todo.id, inputValue, todo.isCompleted)
+      .then(reponse => {
+        const updateTodo = reponse.data;
+        setTodo(todo.id, updateTodo);
+        setIsEditMode(false);
+      })
+      .catch(console.error);
   };
 
   const handleCancel = () => {
+    setInputValue(todo.todo);
     setIsEditMode(false);
   };
 
