@@ -1,5 +1,5 @@
 import * as Styled from './styled';
-import {auth} from '../../apis/auth';
+import { auth } from '../../apis/auth';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { setToken } from '../../utils/localStorage';
 import { useNavigate } from 'react-router-dom';
@@ -31,12 +31,14 @@ const SigninPage = () => {
           <Styled.StyledInput
             type="text"
             name="id"
+            value={inputValue.id}
             placeholder="아이디"
             onChange={changeInputValue}
           />
           <Styled.StyledInput
             type="password"
             name="password"
+            value={inputValue.password}
             placeholder="비밀번호"
             onChange={changeInputValue}
           />
