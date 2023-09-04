@@ -1,7 +1,22 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { deleteToken, getToken } from '../../utils/localStorage';
+import { useEffect, useState } from 'react';
 
 const Header = () => {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsSignedIn(!!getToken());
+  }, [location]);
+
+  const logout = () => {
+    deleteToken()
+    navigate('/signin');
+  };
+
   return (
     <HeaderContainer>
       <HeaderInner>
@@ -10,10 +25,17 @@ const Header = () => {
           <NavLink to="/">HOME</NavLink>
           <NavLink to="/todo">TODO-LIST</NavLink>
         </MiddleSection>
-        <RightSection>
-          <NavLink to="/signin">SIGN IN</NavLink>
-          <NavLink to="/signup">SIGN UP</NavLink>
-        </RightSection>
+
+        {isSignedIn ? (
+          <RightSection>
+            <StyledButton onClick={logout}>LOG OUT</StyledButton>
+          </RightSection>
+        ) : (
+          <RightSection>
+            <NavLink to="/signin">SIGN IN</NavLink>
+            <NavLink to="/signup">SIGN UP</NavLink>
+          </RightSection>
+        )}
       </HeaderInner>
     </HeaderContainer>
   );
@@ -59,4 +81,8 @@ const RightSection = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
+`;
+
+const StyledButton = styled.div`
+  cursor: pointer;
 `;
