@@ -15,14 +15,14 @@ export const todo = {
   readTodo() {
     //:AxiosPromise<>
     return instance({
-      url: '/todo',
+      url: '/todos',
       method: 'get',
     });
   },
   updateTodo(id: number, todo: string, isCompleted: boolean) {
     //:AxiosPromise<>
     return instance({
-      url: `/todo/${id}`,
+      url: `/todos/${id}`,
       method: 'put',
       data: {
         todo,
@@ -32,7 +32,7 @@ export const todo = {
   },
   deleteTodo(id: number) {
     return instance({
-      url: `todo/${id}`,
+      url: `todos/${id}`,
       method: 'delete',
     });
   },
