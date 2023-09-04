@@ -7,8 +7,7 @@ interface Props {
 }
 
 const PublicRoute: React.FC<Props> = ({ children }) => {
-
-  if(getToken()) return <Navigate to='/todo'/>;
+  if (getToken()) return <Navigate to="/todo" />;
 
   return children;
 };

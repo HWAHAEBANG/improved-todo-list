@@ -7,8 +7,7 @@ interface Props {
 }
 
 const ProtectedRoute: React.FC<Props> = ({ children }) => {
-
-  if(!getToken()) return <Navigate to='/signin'/>
+  if (!getToken()) return <Navigate to="/signin" />;
 
   return children;
 };
