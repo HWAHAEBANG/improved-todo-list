@@ -13,7 +13,7 @@ const Header = () => {
   }, [location]);
 
   const logout = () => {
-    deleteToken()
+    deleteToken();
     navigate('/signin');
   };
 
