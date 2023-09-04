@@ -1,18 +1,30 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { styled } from 'styled-components';
+import { Todo } from '../../types/todo';
+import { todo as todoApi } from '../../apis/todo';
+import { todosContext } from '../../contexts/todosContext';
 
 interface Props {
   setIsEditMode: (x: boolean) => void;
+  todo: Todo;
 }
 
-const TodoShow: FC<Props> = ({ setIsEditMode }) => {
+const TodoShow: FC<Props> = ({ setIsEditMode, todo }) => {
+  const { todos, setTodos } = useContext(todosContext);
+
   const handleDelete = () => {
-    alert('삭제');
+    todoApi
+      .deleteTodo(todo.id)
+      .then(() => {
+        const deletedTodos = todos.filter(target => todo.id !== target.id);
+        setTodos(deletedTodos);
+      })
+      .catch();
   };
 
   return (
     <StyledForm>
-      <StyledParagraph>투두내용</StyledParagraph>
+      <StyledParagraph>{todo.todo}</StyledParagraph>
       <div>
         <StyledButton type="button" onClick={() => setIsEditMode(true)}>
           수정
