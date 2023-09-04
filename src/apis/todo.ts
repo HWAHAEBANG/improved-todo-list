@@ -2,7 +2,7 @@
 import { instance } from '../configs/axios';
 // import type { todoResponse, todosResponse } from '../types/todo';
 
-export default {
+export const todo = {
   creatTodo(todo: string) {
     return instance({
       url: '/todos',

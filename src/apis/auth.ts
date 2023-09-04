@@ -2,7 +2,7 @@ import { instance } from '../configs/axios';
 import { AxiosPromise } from 'axios';
 import { SignInResponse } from '../types/auth';
 
-export default {
+export const auth = {
   signin(email: string, password: string): AxiosPromise<SignInResponse> {
     return instance({
       url: '/auth/signin',
