@@ -1,5 +1,5 @@
 import * as Styled from './styled';
-import auth from '../../apis/auth';
+import {auth} from '../../apis/auth';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { setToken } from '../../utils/localStorage';
 import { useNavigate } from 'react-router-dom';

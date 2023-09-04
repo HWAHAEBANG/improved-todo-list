@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import * as Styled from '../SigninPage/styled';
-import auth from '../../apis/auth';
+import {auth} from '../../apis/auth';
 import { useNavigate } from 'react-router-dom';
 
 const SignupPage = () => {
