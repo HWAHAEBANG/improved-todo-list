@@ -1,16 +1,30 @@
-import { useState } from 'react';
-import type { ChangeEventHandler /* , FormEventHandler */ } from 'react';
+import { useState, ChangeEvent, FormEvent, useContext } from 'react';
 import { styled } from 'styled-components';
+import { todo } from '../../apis/todo';
+import { todosContext } from '../../contexts/todosContext';
 
 const TodoInput = () => {
   const [inputValue, setInputValue] = useState('');
+  const { setTodos } = useContext(todosContext);
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
-    setInputValue(e.currentTarget.value);
+  const changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
   };
 
-  const handleSubmit = () => {
-    alert('추가');
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    todo
+      .creatTodo(inputValue)
+      .then(response => {
+        const newTodo = response.data;
+        setTodos(prevState => [...prevState, newTodo]);
+        setInputValue('');
+      })
+      .catch(error => {
+        if (error.response.status === 400) {
+          alert('입력이 비어있습니다.');
+        }
+      });
   };
 
   return (
@@ -18,7 +32,7 @@ const TodoInput = () => {
       <StyledInput
         type="text"
         value={inputValue}
-        onChange={handleChange}
+        onChange={changeInputValue}
         placeholder="할 일을 입력해주세요."
       />
       <StyledButton type="submit">추가</StyledButton>
@@ -55,4 +69,5 @@ const StyledButton = styled.button`
   margin: 0 5px;
   height: 40px;
   color: white;
+  cursor: pointer;
 `;
