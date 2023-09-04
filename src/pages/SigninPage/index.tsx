@@ -8,6 +8,7 @@ const SigninPage = () => {
   const navigate = useNavigate();
 
   const [inputValue, setInputValue] = useState({ id: '', password: '' });
+
   const changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
   };
@@ -20,7 +21,7 @@ const SigninPage = () => {
         setToken(response.data.access_token);
         navigate('/todo');
       })
-      .catch(error => error.log(error));
+      .catch(() => alert('아이디 또는 비밀번호를 다시 확인해주세요.'));
   };
 
   return (
